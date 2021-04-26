@@ -1,0 +1,68 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html
+
+prod_sales:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/prodsales.csv
+  layer: raw
+  load_args:
+    sep: ';'
+    encoding: "latin"
+
+data_quality_report:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/data_quality_report.csv
+  layer: reporting
+  load_args:
+    sep: ','
+    encoding: "latin"
+  
+prod_sales_filled:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/prod_sales_filled.csv
+  layer: intermediate
+  load_args:
+    sep: ','
+    encoding: "latin"
+
+prod_sales_date_range:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/prod_sales_date_range.csv
+  layer: primary
+  load_args:
+    sep: ','
+    encoding: "latin"
+
+ctgan_synthetic_data:
+    type: pandas.CSVDataSet
+    filepath: data/02_intermediate/synthetic/ctgan_synthetic_data.csv
+    layer: intermediate
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+CTGAN_eval:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/ctgan_eval.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+gaussian_copula_synthetic_data:
+    type: pandas.CSVDataSet
+    filepath: data/02_intermediate/synthetic/gaussian_copula_synthetic_data.csv
+    layer: intermediate
+    load_args:
+      sep: ','
+      encoding: "latin"
+      
+GC_eval:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/gaussian_copula_eval.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

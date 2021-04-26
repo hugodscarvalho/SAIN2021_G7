@@ -1,0 +1,9 @@
+synthetic_data:
+  CTGAN:
+    rows: 100000
+  GaussianCopula: 
+    rows: 100000
+
+time:
+  end_date: 01/05/2021
+  frequency: M
