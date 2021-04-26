@@ -5,6 +5,8 @@ from typing import Dict, List
 from sdv.evaluation import evaluate
 from sdv.tabular import CTGAN, GaussianCopula
 
+from sklearn.preprocessing import StandardScaler
+
 def linear_interpolation(prodsales: pd.DataFrame) -> pd.DataFrame:
     """Node to fill missing values in raw data using linear interpolation. 
     With this technique unknown data points between two known data points can estimated.
@@ -85,5 +87,29 @@ def add_date_range(prod_sales_filled: pd.DataFrame, parameters: Dict) -> pd.Data
 
     prod_sales_date_range = prod_sales_filled.copy()
     prod_sales_date_range['date'] = pd.date_range(end=end_date, periods=len(prod_sales_filled), freq=frequency)
-
+    
     return prod_sales_date_range
+
+def standardize(prod_sales_date_range: pd.DataFrame) -> List:
+    """Node to standardize the data using the library StandardScaler
+    from the sklearn.preprocessing. This method standardizes features 
+    by removing the mean and scaling to unit variance
+
+    Args:
+        prod_sales_date_range (pd.DataFrame): Production and Sales data with date range
+
+    Returns:
+        List: Production and Sales data and the used scaler as joblib.
+    """
+    #Convert to DateTime format
+    prod_sales_date_range["date"] = prod_sales_date_range["date"].apply(pd.to_datetime, format= "%Y/%m/%d")
+    #Convert to timestamp
+    prod_sales_date_range['date'] = pd.to_datetime(prod_sales_date_range['date']).astype(np.int64)
+    print(prod_sales_date_range)
+    scaler = StandardScaler()
+    scaler.fit(prod_sales_date_range)
+
+    _prod_sales =  pd.DataFrame(scaler.transform(prod_sales_date_range), columns = prod_sales_date_range.columns)
+    print(_prod_sales)
+
+    return _prod_sales, scaler

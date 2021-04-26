@@ -1,7 +1,7 @@
 metric,name,raw_score,normalized_score,min_value,max_value,goal
-LogisticDetection,LogisticRegression Detection,0.966444180570838,0.966444180570838,0.0,1.0,MAXIMIZE
-SVCDetection,SVC Detection,0.4488527157314304,0.4488527157314304,0.0,1.0,MAXIMIZE
-GMLogLikelihood,GaussianMixture Log Likelihood,-58.39832168133836,4.3444133681003205e-26,-inf,inf,MAXIMIZE
-KSTest,Inverted Kolmogorov-Smirnov D statistic,0.9422488836898396,0.9422488836898396,0.0,1.0,MAXIMIZE
-KSTestExtended,Inverted Kolmogorov-Smirnov D statistic,0.9422488836898396,0.9422488836898396,0.0,1.0,MAXIMIZE
-ContinuousKLDivergence,Continuous Kullback–Leibler Divergence,0.45248933146951165,0.45248933146951165,0.0,1.0,MAXIMIZE
+LogisticDetection,LogisticRegression Detection,0.9256595828538196,0.9256595828538196,0.0,1.0,MAXIMIZE
+SVCDetection,SVC Detection,0.48724150287489265,0.48724150287489265,0.0,1.0,MAXIMIZE
+GMLogLikelihood,GaussianMixture Log Likelihood,-58.316561262448346,4.714539080883603e-26,-inf,inf,MAXIMIZE
+KSTest,Inverted Kolmogorov-Smirnov D statistic,0.9418288836898395,0.9418288836898395,0.0,1.0,MAXIMIZE
+KSTestExtended,Inverted Kolmogorov-Smirnov D statistic,0.9418288836898395,0.9418288836898395,0.0,1.0,MAXIMIZE
+ContinuousKLDivergence,Continuous Kullback–Leibler Divergence,0.4526472754602274,0.4526472754602274,0.0,1.0,MAXIMIZE

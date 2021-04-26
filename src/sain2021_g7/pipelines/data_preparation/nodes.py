@@ -59,6 +59,20 @@ def add_date_range(prodsales_filled: pd.DataFrame, parameters: Dict) -> pd.DataF
     from sain2021_g7.pipelines.data_preparation.data_preparation import add_date_range
     return add_date_range(prodsales_filled, parameters)
 
+def standardize(prod_sales_date_range: pd.DataFrame) -> List:
+    """Node to standardize the data using the library StandardScaler
+    from the sklearn.preprocessing. This method standardizes features 
+    by removing the mean and scaling to unit variance
+
+    Args:
+        prod_sales_date_range (pd.DataFrame): Training data
+
+    Returns:
+        List: Production and Sales data and the used scaler as joblib.
+    """
+    from sain2021_g7.pipelines.data_preparation.data_preparation import standardize
+    return standardize(prod_sales_date_range)
+
 def ctgan_synthetic_generator(prodsales_filled: pd.DataFrame, parameters: Dict) -> List:
     """Node to generate synthetic data using a CTGAN. The sdv.tabular. CTGAN model is based 
     on the GAN-based Deep Learning data synthesizer which was presented at the NeurIPS 

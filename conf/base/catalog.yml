@@ -50,6 +50,14 @@ CTGAN_eval:
     load_args:
       sep: ','
       encoding: "latin"
+  
+ctgan_synthetic_date_range:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/synthetic/ctgan_synthetic_date_range.csv
+  layer: primary
+  load_args:
+    sep: ','
+    encoding: "latin"
 
 gaussian_copula_synthetic_data:
     type: pandas.CSVDataSet
@@ -63,6 +71,28 @@ GC_eval:
     type: pandas.CSVDataSet
     filepath: data/08_reporting/gaussian_copula_eval.csv
     layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+gaussian_copula_synthetic_date_range:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/synthetic/gaussian_copula_synthetic_date_range.csv
+  layer: primary
+  load_args:
+    sep: ','
+    encoding: "latin"
+  
+prod_sales_SCALER:
+    type: pickle.PickleDataSet
+    filepath: data/05_model_input/prod_sales_scaler.joblib
+    backend: joblib
+    layer: model_input
+
+prod_sales_standardized: 
+    type: pandas.CSVDataSet
+    filepath: data/05_model_input/prod_sales_standardized.csv
+    layer: model_input
     load_args:
       sep: ','
       encoding: "latin"
