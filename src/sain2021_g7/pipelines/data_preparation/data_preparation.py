@@ -2,13 +2,14 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List
 
-from sdv.evaluation import evaluate
-from sdv.tabular import CTGAN, GaussianCopula
+# from sdv.evaluation import evaluate
+# from sdv.tabular import CTGAN, GaussianCopula
 
 from sklearn.preprocessing import StandardScaler
 
+
 def linear_interpolation(prodsales: pd.DataFrame) -> pd.DataFrame:
-    """Node to fill missing values in raw data using linear interpolation. 
+    """Node to fill missing values in raw data using linear interpolation.
     With this technique unknown data points between two known data points can estimated.
     The direction of filling of values will be forward.
     Args:
@@ -17,25 +18,27 @@ def linear_interpolation(prodsales: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Production and Sales data with missing values filled
     """
-    #Use linear interpolation to fill missing data
-    prodsales.interpolate(method ='linear', limit_direction ='forward', inplace=True)
-    #Round entire DataFrame to 0 decimals once linear interpolation will generate float type and convert it to int
+    # Use linear interpolation to fill missing data
+    prodsales.interpolate(method="linear", limit_direction="forward", inplace=True)
+    # Round entire DataFrame to 0 decimals once linear interpolation will generate float type and convert it to int
     _prodsales = prodsales.copy()
     _prodsales = prodsales.round(0).astype(int)
 
     return _prodsales
 
 
-def ctgan_synthetic_generator(prod_sales_filled: pd.DataFrame, parameters: Dict) -> List:
-    """Node to generate synthetic data using a CTGAN. The sdv.tabular. CTGAN model is based 
-    on the GAN-based Deep Learning data synthesizer which was presented at the NeurIPS 
+def ctgan_synthetic_generator(
+    prod_sales_filled: pd.DataFrame, parameters: Dict
+) -> List:
+    """Node to generate synthetic data using a CTGAN. The sdv.tabular. CTGAN model is based
+    on the GAN-based Deep Learning data synthesizer which was presented at the NeurIPS
     2020 conference by the paper titled Modeling Tabular data using Conditional GAN.
     Args:
         prod_sales_filled (pd.DataFrame): Production and Sales data filled
         parameters (Dict): Parameters defined in parameters.yml
 
     Returns:
-        List: List of pandas DataFrames: Production and Sales synthetic data and 
+        List: List of pandas DataFrames: Production and Sales synthetic data and
         and the evaluation of the synthetic data.
     """
     model = CTGAN()
@@ -49,16 +52,18 @@ def ctgan_synthetic_generator(prod_sales_filled: pd.DataFrame, parameters: Dict)
     return ctgan_synthetic_data, ctgan_eval
 
 
-def gaussian_copula_synthetic_generator(prod_sales_filled: pd.DataFrame, parameters: Dict) -> List:
-    """Node to generate synthetic data using a GaussianCopula. Intuitively, a copula is a mathematical 
-    function that allows us to describe the joint distribution of multiple random variables by 
+def gaussian_copula_synthetic_generator(
+    prod_sales_filled: pd.DataFrame, parameters: Dict
+) -> List:
+    """Node to generate synthetic data using a GaussianCopula. Intuitively, a copula is a mathematical
+    function that allows us to describe the joint distribution of multiple random variables by
     analyzing the dependencies between their marginal distributions.
     Args:
         prod_sales_filled (pd.DataFrame): Production and Sales data filled
         parameters (Dict): Parameters defined in parameters.yml
 
     Returns:
-        List: List of pandas DataFrames: Production and Sales synthetic data and 
+        List: List of pandas DataFrames: Production and Sales synthetic data and
         and the evaluation of the synthetic data.
     """
     model = GaussianCopula()
@@ -66,13 +71,16 @@ def gaussian_copula_synthetic_generator(prod_sales_filled: pd.DataFrame, paramet
 
     rows = parameters["synthetic_data"]["GaussianCopula"]["rows"]
     gaussian_copula_synthetic_data = model.sample(rows)
-    gc_eval = evaluate(gaussian_copula_synthetic_data, prod_sales_filled, aggregate=False)
+    gc_eval = evaluate(
+        gaussian_copula_synthetic_data, prod_sales_filled, aggregate=False
+    )
     gaussian_copula_synthetic_data = gaussian_copula_synthetic_data.round(0).astype(int)
 
     return gaussian_copula_synthetic_data, gc_eval
 
+
 def add_date_range(prod_sales_filled: pd.DataFrame, parameters: Dict) -> pd.DataFrame:
-    """Node to add a date range to the data using date_range(), one of the general functions 
+    """Node to add a date range to the data using date_range(), one of the general functions
     in Pandas which is used to return a fixed frequency DatetimeIndex
 
     Args:
@@ -86,30 +94,8 @@ def add_date_range(prod_sales_filled: pd.DataFrame, parameters: Dict) -> pd.Data
     frequency = parameters["time"]["frequency"]
 
     prod_sales_date_range = prod_sales_filled.copy()
-    prod_sales_date_range['date'] = pd.date_range(end=end_date, periods=len(prod_sales_filled), freq=frequency)
-    
+    prod_sales_date_range["date"] = pd.date_range(
+        end=end_date, periods=len(prod_sales_filled), freq=frequency
+    )
+
     return prod_sales_date_range
-
-def standardize(prod_sales_date_range: pd.DataFrame) -> List:
-    """Node to standardize the data using the library StandardScaler
-    from the sklearn.preprocessing. This method standardizes features 
-    by removing the mean and scaling to unit variance
-
-    Args:
-        prod_sales_date_range (pd.DataFrame): Production and Sales data with date range
-
-    Returns:
-        List: Production and Sales data and the used scaler as joblib.
-    """
-    #Convert to DateTime format
-    prod_sales_date_range["date"] = prod_sales_date_range["date"].apply(pd.to_datetime, format= "%Y/%m/%d")
-    #Convert to timestamp
-    prod_sales_date_range['date'] = pd.to_datetime(prod_sales_date_range['date']).astype(np.int64)
-    print(prod_sales_date_range)
-    scaler = StandardScaler()
-    scaler.fit(prod_sales_date_range)
-
-    _prod_sales =  pd.DataFrame(scaler.transform(prod_sales_date_range), columns = prod_sales_date_range.columns)
-    print(_prod_sales)
-
-    return _prod_sales, scaler

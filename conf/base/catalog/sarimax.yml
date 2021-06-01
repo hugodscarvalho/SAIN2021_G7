@@ -1,0 +1,71 @@
+results_sarimax_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_sarimax_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_sarimax_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/results_sarimax_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+concat_results_sarimax: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/sarimax/concat_results_sarimax.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

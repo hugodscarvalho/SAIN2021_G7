@@ -96,3 +96,27 @@ prod_sales_standardized:
     load_args:
       sep: ','
       encoding: "latin"
+
+prod_sales_train: 
+    type: pandas.CSVDataSet
+    filepath: data/05_model_input/prod_sales_train.csv
+    layer: model_input
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+prod_sales_test: 
+    type: pandas.CSVDataSet
+    filepath: data/05_model_input/prod_sales_test.csv
+    layer: model_input
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+exploration:
+    type: pandas.CSVDataSet
+    filepath: data/04_feature/exploration.csv
+    layer: feature
+    load_args:
+      sep: ','
+      encoding: "latin"

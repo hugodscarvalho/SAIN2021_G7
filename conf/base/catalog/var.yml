@@ -1,0 +1,71 @@
+results_var_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_var_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_var_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/results_var_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+concat_results_var: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/var/concat_results_var.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

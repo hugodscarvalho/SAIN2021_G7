@@ -1,0 +1,2 @@
+r2,mae,nmae,mse,rmse,rmspe,rae,mape,target
+0.462,366.505,10.802,219269.305,468.262,0.354,0.692,0.25,sfama

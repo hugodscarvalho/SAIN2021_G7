@@ -32,8 +32,9 @@ generated using Kedro 0.17.2
 import pandas as pd
 from typing import Dict, List
 
+
 def linear_interpolation(prodsales: pd.DataFrame) -> pd.DataFrame:
-    """Node to fill missing values in raw data using linear interpolation. 
+    """Node to fill missing values in raw data using linear interpolation.
     With this technique unknown data points between two known data points can estimated.
     The direction of filling of values will be forward.
     Args:
@@ -42,11 +43,15 @@ def linear_interpolation(prodsales: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Production and Sales data with missing values filled
     """
-    from sain2021_g7.pipelines.data_preparation.data_preparation import linear_interpolation
+    from sain2021_g7.pipelines.data_preparation.data_preparation import (
+        linear_interpolation,
+    )
+
     return linear_interpolation(prodsales)
 
+
 def add_date_range(prodsales_filled: pd.DataFrame, parameters: Dict) -> pd.DataFrame:
-    """Node to add a date range to the data using date_range(), one of the general functions 
+    """Node to add a date range to the data using date_range(), one of the general functions
     in Pandas which is used to return a fixed frequency DatetimeIndex
 
     Args:
@@ -57,11 +62,13 @@ def add_date_range(prodsales_filled: pd.DataFrame, parameters: Dict) -> pd.DataF
         pd.DataFrame: Production and Sales data with date range
     """
     from sain2021_g7.pipelines.data_preparation.data_preparation import add_date_range
+
     return add_date_range(prodsales_filled, parameters)
+
 
 def standardize(prod_sales_date_range: pd.DataFrame) -> List:
     """Node to standardize the data using the library StandardScaler
-    from the sklearn.preprocessing. This method standardizes features 
+    from the sklearn.preprocessing. This method standardizes features
     by removing the mean and scaling to unit variance
 
     Args:
@@ -71,35 +78,45 @@ def standardize(prod_sales_date_range: pd.DataFrame) -> List:
         List: Production and Sales data and the used scaler as joblib.
     """
     from sain2021_g7.pipelines.data_preparation.data_preparation import standardize
+
     return standardize(prod_sales_date_range)
 
+
 def ctgan_synthetic_generator(prodsales_filled: pd.DataFrame, parameters: Dict) -> List:
-    """Node to generate synthetic data using a CTGAN. The sdv.tabular. CTGAN model is based 
-    on the GAN-based Deep Learning data synthesizer which was presented at the NeurIPS 
+    """Node to generate synthetic data using a CTGAN. The sdv.tabular. CTGAN model is based
+    on the GAN-based Deep Learning data synthesizer which was presented at the NeurIPS
     2020 conference by the paper titled Modeling Tabular data using Conditional GAN.
     Args:
         prodsales (pd.DataFrame): Production and Sales data filled
         parameters (Dict): Parameters defined in parameters.yml
 
     Returns:
-        List: List of pandas DataFrames: Production and Sales synthetic data and 
+        List: List of pandas DataFrames: Production and Sales synthetic data and
         and the evaluation of the synthetic data.
     """
-    from sain2021_g7.pipelines.data_preparation.data_preparation import ctgan_synthetic_generator
+    from sain2021_g7.pipelines.data_preparation.data_preparation import (
+        ctgan_synthetic_generator,
+    )
+
     return ctgan_synthetic_generator(prodsales_filled, parameters)
 
-def gaussian_copula_synthetic_generator(prodsales_filled: pd.DataFrame, parameters: Dict) -> List:
-    """Node to generate synthetic data using a GaussianCopula. Intuitively, a copula is a mathematical 
-    function that allows us to describe the joint distribution of multiple random variables by 
+
+def gaussian_copula_synthetic_generator(
+    prodsales_filled: pd.DataFrame, parameters: Dict
+) -> List:
+    """Node to generate synthetic data using a GaussianCopula. Intuitively, a copula is a mathematical
+    function that allows us to describe the joint distribution of multiple random variables by
     analyzing the dependencies between their marginal distributions.
     Args:
         prodsales (pd.DataFrame): Production and Sales data filled
         parameters (Dict): Parameters defined in parameters.yml
 
     Returns:
-        List: List of pandas DataFrames: Production and Sales synthetic data and 
+        List: List of pandas DataFrames: Production and Sales synthetic data and
         and the evaluation of the synthetic data.
     """
-    from sain2021_g7.pipelines.data_preparation.data_preparation import gaussian_copula_synthetic_generator
-    return gaussian_copula_synthetic_generator(prodsales_filled, parameters)
+    from sain2021_g7.pipelines.data_preparation.data_preparation import (
+        gaussian_copula_synthetic_generator,
+    )
 
+    return gaussian_copula_synthetic_generator(prodsales_filled, parameters)

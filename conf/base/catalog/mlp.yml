@@ -1,0 +1,71 @@
+results_mlp_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_mlp_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_mlp_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/results_mlp_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+concat_results_mlp: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/multi_layer_perceptron/concat_results_mlp.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

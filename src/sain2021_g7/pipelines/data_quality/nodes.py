@@ -31,10 +31,11 @@ generated using Kedro 0.17.2
 """
 import pandas as pd
 
+
 def data_quality(prodsales: pd.DataFrame) -> pd.DataFrame:
-    """Node to create a data quality report. The parts of the report will include the 
-    following analysis: Data type, Row Count, Missing Values, Unique Values and then 
-    use the describe() function to find mean, standard deviation (std), minimum value, 
+    """Node to create a data quality report. The parts of the report will include the
+    following analysis: Data type, Row Count, Missing Values, Unique Values and then
+    use the describe() function to find mean, standard deviation (std), minimum value,
     maximum value, 25% (percentile), 50% (percentile) and  75% (percentile).
 
     Args:
@@ -44,4 +45,5 @@ def data_quality(prodsales: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: Data quality report
     """
     from sain2021_g7.pipelines.data_quality.data_quality import data_quality
+
     return data_quality(prodsales)

@@ -31,8 +31,157 @@ This is a boilerplate pipeline 'modelling'
 generated using Kedro 0.17.2
 """
 
+from kedro.config import ConfigLoader
 from kedro.pipeline import Pipeline, node
+from .nodes import holt_winters, train_test_split, multi_layer_perceptron, auto_regressor,auto_arima, sarimax, var, moving_average, holt_winters, concat
+
+
+# def create_pipeline(**kwargs):
+
+#     return Pipeline([
+#         node(
+#             func=train_test_split,
+#             inputs=["prod_sales_date_range", "parameters"],
+#             outputs=["prod_sales_train", "prod_sales_test"],
+#             tags="split",
+#             ),
+#         node(
+#             func=multi_layer_perceptron,
+#             inputs=["prod_sales_train", "prod_sales_test", "parameters"],
+#             outputs="results_mlp",
+#             tags="multi_layer_perceptron",
+#             ),
+#         ])
 
 
 def create_pipeline(**kwargs):
-    return Pipeline([])
+    conf_paths = ["conf/base", "conf/local"]
+    conf_loader = ConfigLoader(conf_paths)
+    parameters = conf_loader.get("parameters*", "parameters*/**")
+    TARGETS = parameters["targets"]
+
+    pipeline_list = []
+
+    pipeline_list.append(
+        node(
+            func=train_test_split,
+            inputs=["prod_sales_date_range", "parameters"],
+            outputs=["prod_sales_train", "prod_sales_test"],
+            tags="split",
+        ),
+    )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_MLP",
+    #             func=multi_layer_perceptron,
+    #             inputs=["prod_sales_train", "prod_sales_test", f"params:{t}"],
+    #             outputs=f"results_mlp_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_AR",
+    #             func=auto_regressor,
+    #             inputs=[
+    #                 "prod_sales_train",
+    #                 "prod_sales_test",
+    #                 "prod_sales_date_range",
+    #                 f"params:{t}",
+    #             ],
+    #             outputs=f"results_ar_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_AUTO_ARIMA",
+    #             func=auto_arima,
+    #             inputs=[
+    #                 "prod_sales_train",
+    #                 "prod_sales_test",
+    #                 "prod_sales_date_range",
+    #                 f"params:{t}",
+    #             ],
+    #             outputs=f"results_auto_arima_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_SARIMAX",
+    #             func=sarimax,
+    #             inputs=[
+    #                 "prod_sales_train",
+    #                 "prod_sales_test",
+    #                 "prod_sales_date_range",
+    #                 f"params:{t}",
+    #             ],
+    #             outputs=f"results_sarimax_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_VAR",
+    #             func=var,
+    #             inputs=[
+    #                 "prod_sales_train",
+    #                 "prod_sales_test",
+    #                 "prod_sales_date_range",
+    #                 f"params:{t}",
+    #             ],
+    #             outputs=f"results_var_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    # for idx, t in enumerate(TARGETS):
+    #     pipeline_list.append(
+    #         node(
+    #             name=f"{t}_moving_average",
+    #             func=moving_average,
+    #             inputs=[
+    #                 "prod_sales_train",
+    #                 "prod_sales_test",
+    #                 "prod_sales_date_range",
+    #                 f"params:{t}",
+    #             ],
+    #             outputs=f"results_moving_average_{t}",
+    #             tags=["encode"],
+    #         )
+    #     )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_holt_winters",
+                func=holt_winters,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_holt_winters_{t}",
+                tags=["encode"],
+            )
+        )
+    # MODELS= ["mlp", "ar", "auto_arima", "sarimax"]
+    MODELS= ["holt_winters"]
+    for idx, m in enumerate(MODELS):
+        pipeline_list.append(
+            node(
+                name=f"Concatenate_{m}",
+                func=concat,
+                inputs=[f"results_{m}_pporto", f"results_{m}_pguima", f"results_{m}_sporto", f"results_{m}_spovoa", f"results_{m}_sbarce", f"results_{m}_sfama", f"results_{m}_sbraga", f"results_{m}_sguima"],
+                outputs=f"concat_results_{m}",
+                tags=["encode"],
+            )
+        )
+    
+
+    return Pipeline(pipeline_list)

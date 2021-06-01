@@ -31,7 +31,14 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
-from sain2021_g7.pipelines import data_quality, data_exploration, data_preparation, modelling
+from sain2021_g7.pipelines import (
+    data_quality,
+    data_exploration,
+    data_preparation,
+    modelling,
+    evaluation,
+)
+
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
@@ -44,9 +51,13 @@ def register_pipelines() -> Dict[str, Pipeline]:
     de = data_exploration.create_pipeline()
     dp = data_preparation.create_pipeline()
     mod = modelling.create_pipeline()
-    
-    return {"__default__": dq + de + dp + mod,
-            "data_quality": dq,
-            "data_preparation": dp,
-            "data_exploraiton": de,
-            "modelling": mod}
+    ev = evaluation.create_pipeline()
+
+    return {
+        "__default__": dq + de + dp + mod,
+        "data_quality": dq,
+        "data_preparation": dp,
+        "data_exploration": de,
+        "modelling": mod,
+        "evaluation": ev,
+    }

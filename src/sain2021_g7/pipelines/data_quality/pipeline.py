@@ -34,14 +34,16 @@ generated using Kedro 0.17.2
 from kedro.pipeline import Pipeline, node
 from .nodes import data_quality
 
-def create_pipeline(**kwargs):
-    
-    return Pipeline([
-        node(
-            func=data_quality,
-            inputs="prod_sales",
-            outputs="data_quality_report",
-            tags="quality",
-            )
-        ])
 
+def create_pipeline(**kwargs):
+
+    return Pipeline(
+        [
+            node(
+                func=data_quality,
+                inputs="prod_sales",
+                outputs="data_quality_report",
+                tags="quality",
+            )
+        ]
+    )

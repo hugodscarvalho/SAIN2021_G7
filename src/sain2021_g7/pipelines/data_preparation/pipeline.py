@@ -32,54 +32,62 @@ generated using Kedro 0.17.2
 """
 
 from kedro.pipeline import Pipeline, node
-from .nodes import (linear_interpolation, add_date_range, standardize, ctgan_synthetic_generator, gaussian_copula_synthetic_generator)
+from .nodes import (
+    linear_interpolation,
+    add_date_range,
+    standardize,
+    ctgan_synthetic_generator,
+    gaussian_copula_synthetic_generator,
+)
+
 
 def create_pipeline(**kwargs):
-    
-    return Pipeline([
-        node(
-            func=linear_interpolation,
-            inputs="prod_sales",
-            outputs="prod_sales_filled",
-            tags="fill",
-            ),
-        node(
-            func=add_date_range,
-            inputs=["prod_sales_filled", "parameters"],
-            outputs="prod_sales_date_range",
-            tags="date",
-            ),
-        node(
-            func=standardize,
-            inputs="prod_sales_date_range",
-            outputs=["prod_sales_standardized", "prod_sales_SCALER"],
-            tags="standardize",
-            ),
-        node(
-            func=ctgan_synthetic_generator,
-            inputs=["prod_sales_filled", "parameters"],
-            outputs=["ctgan_synthetic_data", "CTGAN_eval"],
-            tags="synthetic",
-            ),
-        node(
-            func=gaussian_copula_synthetic_generator,
-            inputs=["prod_sales_filled", "parameters"],
-            outputs=["gaussian_copula_synthetic_data", "GC_eval"],
-            tags="synthetic",
-            ),
-        node(
-            func=add_date_range,
-            name="CTGAN_Date_Range",
-            inputs=["ctgan_synthetic_data", "parameters"],
-            outputs="ctgan_synthetic_date_range",
-            tags="date",
-            ),
-        node(
-            func=add_date_range,
-            name="GaussianCopula_Date_Range",
-            inputs=["gaussian_copula_synthetic_data", "parameters"],
-            outputs="gaussian_copula_synthetic_date_range",
-            tags="date",
-            ),
-        ])
 
+    return Pipeline(
+        [
+            node(
+                func=linear_interpolation,
+                inputs="prod_sales",
+                outputs="prod_sales_filled",
+                tags="fill",
+            ),
+            node(
+                func=add_date_range,
+                inputs=["prod_sales_filled", "parameters"],
+                outputs="prod_sales_date_range",
+                tags="date",
+            ),
+            # node(
+            #     func=standardize,
+            #     inputs="prod_sales_date_range",
+            #     outputs=["prod_sales_standardized", "prod_sales_SCALER"],
+            #     tags="standardize",
+            #     ),
+            # node(
+            #     func=ctgan_synthetic_generator,
+            #     inputs=["prod_sales_filled", "parameters"],
+            #     outputs=["ctgan_synthetic_data", "CTGAN_eval"],
+            #     tags="synthetic",
+            #     ),
+            # node(
+            #     func=gaussian_copula_synthetic_generator,
+            #     inputs=["prod_sales_filled", "parameters"],
+            #     outputs=["gaussian_copula_synthetic_data", "GC_eval"],
+            #     tags="synthetic",
+            #     ),
+            # node(
+            #     func=add_date_range,
+            #     name="CTGAN_Date_Range",
+            #     inputs=["ctgan_synthetic_data", "parameters"],
+            #     outputs="ctgan_synthetic_date_range",
+            #     tags="date",
+            #     ),
+            # node(
+            #     func=add_date_range,
+            #     name="GaussianCopula_Date_Range",
+            #     inputs=["gaussian_copula_synthetic_data", "parameters"],
+            #     outputs="gaussian_copula_synthetic_date_range",
+            #     tags="date",
+            #     ),
+        ]
+    )

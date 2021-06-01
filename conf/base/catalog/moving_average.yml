@@ -1,0 +1,71 @@
+results_moving_average_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_moving_average_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_moving_average_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/results_moving_average_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+concat_results_moving_average: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/moving_average/concat_results_moving_average.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

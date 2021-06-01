@@ -1,0 +1,71 @@
+results_holt_winters_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_holt_winters_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_holt_winters_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/results_holt_winters_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+concat_results_holt_winters: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/holt_winters/concat_results_holt_winters.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

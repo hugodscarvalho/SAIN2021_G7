@@ -29,3 +29,23 @@
 This is a boilerplate pipeline 'data_exploration'
 generated using Kedro 0.17.2
 """
+import pandas as pd
+from typing import Dict, List
+
+
+def data_exploration(prod_sales_date_range: pd.DataFrame, parameters: Dict):
+    """Node to draw a line plot with x as the timeframe, column "date"
+    and y as the rows of the data according to the timeframe. This
+    node will create a n number of plots based on the columns of
+    the dataset and defined in parameters.
+
+    Args:
+        prod_sales_date_range (pd.DataFrame): Production and Sales data with date range
+        parameters (Dict): Parameters defined in parameters.yml
+
+    Returns:
+        Data exploration of the columns in the data defined as targets in parameters
+    """
+    from sain2021_g7.pipelines.data_exploration.data_exploration import data_exploration
+
+    return data_exploration(prod_sales_date_range, parameters)

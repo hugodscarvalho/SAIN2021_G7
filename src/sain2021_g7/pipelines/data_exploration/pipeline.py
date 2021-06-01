@@ -32,7 +32,20 @@ generated using Kedro 0.17.2
 """
 
 from kedro.pipeline import Pipeline, node
+from kedro.config import ConfigLoader
+
+from .nodes import data_exploration
 
 
 def create_pipeline(**kwargs):
-    return Pipeline([])
+
+    return Pipeline(
+        [
+            node(
+                func=data_exploration,
+                inputs=["prod_sales_date_range", "parameters"],
+                outputs="exploration",
+                tags="exploration",
+            )
+        ]
+    )

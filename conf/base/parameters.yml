@@ -1,3 +1,6 @@
+paths:
+  exploration_folder: data/09_plots
+
 synthetic_data:
   CTGAN:
     rows: 100000
@@ -7,3 +10,26 @@ synthetic_data:
 time:
   end_date: 01/05/2021
   frequency: M
+
+targets: 
+    - pporto
+    - pguima
+    - sporto
+    - spovoa
+    - sbarce
+    - sfama
+    - sbraga
+    - sguima
+
+train_ratio: 0.8
+
+target: pporto
+
+pporto: pporto
+pguima: pguima
+sporto: sporto
+spovoa: spovoa
+sbarce: sbarce
+sfama: sfama
+sbraga: sbraga
+sguima: sguima
