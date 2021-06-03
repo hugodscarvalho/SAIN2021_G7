@@ -1,36 +1,39 @@
+from pandas import to_datetime
+from pandas import DataFrame
+from fbprophet import Prophet
+import pandas as pd
+from matplotlib import pyplot
+from sain2021_g7.pipelines.evaluation.evaluation import evaluate
 
 
+def prophet(df_train, df_test, data, target):
 
-def sarimax(df_train, df_test, data, target):
+    data = data[['date', target]]
+    data['date'] = pd.to_datetime(data['date'])
 
-  
-    df = df[['date', p]].dropna()
-    df = df.set_index('date')
-    daily_df = df.resample('M').mean()
-    d_df = daily_df.reset_index().dropna()
+    data = data.set_index('date')
 
-    d_df.columns = ['ds', 'y']
-    fig = plt.figure(facecolor='w', figsize=(10, 5))
-    #plt.plot(d_df.ds, d_df.y)
+    df = data.resample('D').mean()
+    df = df.reset_index().dropna()
+    df.columns = ['ds', 'y']
+
+    df = df.rename({'date': 'ds', target : 'y'}, axis=1)  # new method
+    
+    df_train = df_train[['date', target]]
+    df_train = df_train.rename({'date': 'ds', target : 'y'}, axis=1)  # new method
+
+    df_test = df_test[['date', target]]
+    df_test = df_test.rename({'date': 'ds', target : 'y'}, axis=1)  # new method
+
     m = Prophet()
-    m.fit(d_df)
-    train=df[-37:]
-    ano = 2
-    periods = ano * 12
-    future = m.make_future_dataframe(periods=periods,  freq = 'M')
-    #print(future)
-    forecast = m.predict(future)
-    forecast[['ds', 'yhat']].tail()
-    forecast=forecast[-37:]
-    forecast.index = forecast.ds
-    forecast = forecast.drop(['ds'], axis=1)
-    forecast = forecast['yhat']
+    m.fit(df_train)
 
-    print(forecast)
+    predictions = m.predict(df_test)
 
-    metrics = evaluate(df_test[target].to_numpy(), predictions.to_numpy())
-
+    #prediction.predicted_mean.plot(ax=ax, label='One-step ahead Forecast', alpha=.7, figsize=(14, 7))
+    metrics = evaluate(df_test['y'].to_numpy(), predictions['yhat'].to_numpy())
     eval_df = pd.DataFrame([metrics], columns=metrics.keys()).round(3)
     eval_df["target"] = target    
     
     return eval_df
+    

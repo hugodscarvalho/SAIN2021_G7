@@ -37,6 +37,7 @@ from sain2021_g7.pipelines import (
     data_preparation,
     modelling,
     evaluation,
+    optimization
 )
 
 
@@ -51,6 +52,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
     de = data_exploration.create_pipeline()
     dp = data_preparation.create_pipeline()
     mod = modelling.create_pipeline()
+    opt = optimization.create_pipeline()
     ev = evaluation.create_pipeline()
 
     return {
@@ -60,4 +62,5 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "data_exploration": de,
         "modelling": mod,
         "evaluation": ev,
+        "optimization":opt
     }

@@ -1,0 +1,31 @@
+results_hill_climbing:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/optimization/results_hill_climbing.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_simulated_annealing:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/optimization/results_simulated_annealing.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_genetic_algorithm:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/optimization/results_genetic_algorithm.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_monte_carlo:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/optimization/results_monte_carlo.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

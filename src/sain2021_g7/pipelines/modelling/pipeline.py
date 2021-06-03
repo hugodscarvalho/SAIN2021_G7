@@ -33,7 +33,7 @@ generated using Kedro 0.17.2
 
 from kedro.config import ConfigLoader
 from kedro.pipeline import Pipeline, node
-from .nodes import holt_winters, train_test_split, multi_layer_perceptron, auto_regressor,auto_arima, sarimax, var, moving_average, holt_winters, concat
+from .nodes import holt_winters, train_test_split, multi_layer_perceptron, auto_regressor,auto_arima, sarimax, VAR, moving_average, holt_winters, Prophet, LSTM, concat
 
 
 # def create_pipeline(**kwargs):
@@ -70,91 +70,91 @@ def create_pipeline(**kwargs):
             tags="split",
         ),
     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_MLP",
-    #             func=multi_layer_perceptron,
-    #             inputs=["prod_sales_train", "prod_sales_test", f"params:{t}"],
-    #             outputs=f"results_mlp_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_AR",
-    #             func=auto_regressor,
-    #             inputs=[
-    #                 "prod_sales_train",
-    #                 "prod_sales_test",
-    #                 "prod_sales_date_range",
-    #                 f"params:{t}",
-    #             ],
-    #             outputs=f"results_ar_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_AUTO_ARIMA",
-    #             func=auto_arima,
-    #             inputs=[
-    #                 "prod_sales_train",
-    #                 "prod_sales_test",
-    #                 "prod_sales_date_range",
-    #                 f"params:{t}",
-    #             ],
-    #             outputs=f"results_auto_arima_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_SARIMAX",
-    #             func=sarimax,
-    #             inputs=[
-    #                 "prod_sales_train",
-    #                 "prod_sales_test",
-    #                 "prod_sales_date_range",
-    #                 f"params:{t}",
-    #             ],
-    #             outputs=f"results_sarimax_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_VAR",
-    #             func=var,
-    #             inputs=[
-    #                 "prod_sales_train",
-    #                 "prod_sales_test",
-    #                 "prod_sales_date_range",
-    #                 f"params:{t}",
-    #             ],
-    #             outputs=f"results_var_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
-    # for idx, t in enumerate(TARGETS):
-    #     pipeline_list.append(
-    #         node(
-    #             name=f"{t}_moving_average",
-    #             func=moving_average,
-    #             inputs=[
-    #                 "prod_sales_train",
-    #                 "prod_sales_test",
-    #                 "prod_sales_date_range",
-    #                 f"params:{t}",
-    #             ],
-    #             outputs=f"results_moving_average_{t}",
-    #             tags=["encode"],
-    #         )
-    #     )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_MLP",
+                func=multi_layer_perceptron,
+                inputs=["prod_sales_train", "prod_sales_test", f"params:{t}"],
+                outputs=f"results_mlp_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_AR",
+                func=auto_regressor,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_ar_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_AUTO_ARIMA",
+                func=auto_arima,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_auto_arima_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_SARIMAX",
+                func=sarimax,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_sarimax_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_VAR",
+                func=VAR,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_var_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_moving_average",
+                func=moving_average,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_moving_average_{t}",
+                tags=["encode"],
+            )
+        )
     for idx, t in enumerate(TARGETS):
         pipeline_list.append(
             node(
@@ -170,8 +170,37 @@ def create_pipeline(**kwargs):
                 tags=["encode"],
             )
         )
-    # MODELS= ["mlp", "ar", "auto_arima", "sarimax"]
-    MODELS= ["holt_winters"]
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_prophet",
+                func=Prophet,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_prophet_{t}",
+                tags=["encode"],
+            )
+        )
+    for idx, t in enumerate(TARGETS):
+        pipeline_list.append(
+            node(
+                name=f"{t}_lstm",
+                func=LSTM,
+                inputs=[
+                    "prod_sales_train",
+                    "prod_sales_test",
+                    "prod_sales_date_range",
+                    f"params:{t}",
+                ],
+                outputs=f"results_lstm_{t}",
+                tags=["encode"],
+            )
+        )
+    MODELS= ["mlp", "ar", "auto_arima", "sarimax", "holt_winters", "svr", "prophet", "var", "moving_average", "lstm"]
     for idx, m in enumerate(MODELS):
         pipeline_list.append(
             node(

@@ -11,7 +11,7 @@ pytest-cov~=2.5
 pytest-mock>=1.7.1, <2.0
 pytest~=6.1.2
 wheel==0.32.2
-numpy==1.20.3
+numpy==1.18.5
 keras==2.4.3
 tensorflow==2.4.1
 statsmodels==0.12.2

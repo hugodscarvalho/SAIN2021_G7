@@ -1,0 +1,71 @@
+results_prophet_pporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_pporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_pguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_pguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_sporto:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_sporto.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_spovoa:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_spovoa.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+results_prophet_sbarce:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_sbarce.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_sfama:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_sfama.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_sbraga:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_sbraga.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+
+results_prophet_sguima:
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/results_prophet_sguima.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"
+  
+concat_results_prophet: 
+    type: pandas.CSVDataSet
+    filepath: data/08_reporting/prophet/concat_results_prophet.csv
+    layer: reporting
+    load_args:
+      sep: ','
+      encoding: "latin"

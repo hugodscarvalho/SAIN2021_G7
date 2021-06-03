@@ -33,6 +33,17 @@ generated using Kedro 0.17.3
 
 from kedro.pipeline import Pipeline, node
 
+from .nodes import optimization
 
 def create_pipeline(**kwargs):
-    return Pipeline([])
+
+    return Pipeline(
+        [
+            node(
+                func=optimization,
+                inputs=['concat_results_sarimax', 'concat_results_prophet'],
+                outputs=['results_hill_climbing', 'results_simulated_annealing', 'results_genetic_algorithm', 'results_monte_carlo'],
+                tags="fill",
+            )
+        ]
+    )

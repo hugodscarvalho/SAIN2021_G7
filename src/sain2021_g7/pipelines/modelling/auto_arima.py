@@ -6,6 +6,8 @@ warnings.filterwarnings('ignore')
 from pmdarima.arima import auto_arima as ar
 from sain2021_g7.pipelines.evaluation.evaluation import evaluate
 
+import os 
+import seaborn as sns 
 
 def auto_arima(df_train, df_test, data, target):
 
@@ -23,6 +25,20 @@ def auto_arima(df_train, df_test, data, target):
     metrics = evaluate(df_test[target], prediction["predicted_sales"])
     eval_df = pd.DataFrame([metrics], columns=metrics.keys()).round(3)
     eval_df["target"] = target    
+    
+    _path = 'data/09_plots/auto_arima'
+
+    if not os.path.exists(_path):
+        os.makedirs(_path)
+
+    sns.set_theme(style="darkgrid")
+    plt.figure(figsize=(10,5))
+    plt.plot(df_train[target] ,label="Training")
+    plt.plot(df_test[target],label="Test")
+    plt.plot(prediction["predicted_sales"],label="Predicted")
+    plt.legend(loc = 'upper right')
+    plt.savefig(f"{_path}/{target}.svg")
+
     
 
     return eval_df

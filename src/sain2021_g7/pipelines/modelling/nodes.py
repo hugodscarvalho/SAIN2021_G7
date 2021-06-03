@@ -51,18 +51,18 @@ def train_test_split(prodsales: pd.DataFrame, parameters: Dict) -> List:
 def multi_layer_perceptron(
     prod_sales_train: pd.DataFrame, prod_sales_test: pd.DataFrame, target: str
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """Multi Layer Perceptron
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.multi_layer_perceptron import (
-        multi_layer_perceptron,
-    )
+    from sain2021_g7.pipelines.modelling.MLP import multi_layer_perceptron
 
     return multi_layer_perceptron(prod_sales_train, prod_sales_test, target)
 
@@ -73,16 +73,18 @@ def auto_regressor(
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """Auto Regressor
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.auto_regressor import auto_regressor
+    from sain2021_g7.pipelines.modelling.AUTO_REGRESSOR import auto_regressor
 
     return auto_regressor(prod_sales_train, prod_sales_test, prod_sales, target)
 
@@ -92,16 +94,18 @@ def auto_arima(
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """Auto Arima
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.auto_arima import auto_arima
+    from sain2021_g7.pipelines.modelling.AUTO_ARIMA import auto_arima
 
     return auto_arima(prod_sales_train, prod_sales_test, prod_sales, target)
 
@@ -111,35 +115,39 @@ def sarimax(
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """SARIMAX
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.sarimax import sarimax
+    from sain2021_g7.pipelines.modelling.SARIMAX import sarimax
 
     return sarimax(prod_sales_train, prod_sales_test, prod_sales, target)
 
-def var(
+def VAR(
     prod_sales_train: pd.DataFrame,
     prod_sales_test: pd.DataFrame,
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """VAR
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.var import var
+    from sain2021_g7.pipelines.modelling.VAR import var
 
     return auto_regressor(prod_sales_train, prod_sales_test, prod_sales, target)
 
@@ -150,16 +158,18 @@ def moving_average(
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """Moving Average
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.moving_average import moving_average
+    from sain2021_g7.pipelines.modelling.MOVING_AVERAGE import moving_average
 
     return moving_average(prod_sales_train, prod_sales_test, prod_sales, target)
 
@@ -169,18 +179,85 @@ def holt_winters(
     prod_sales,
     target: str,
 ) -> pd.DataFrame:
-    """Node to split dataset into train and test dataset for further
-    model trainning.
+    """Holt Winters
 
     Args:
-        prodsales (pd.DataFrame): Production and Sales data
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
 
     Returns:
-        pd.DataFrame: Train and test data
+        pd.DataFrame: results
     """
-    from sain2021_g7.pipelines.modelling.holt_winters import holt_winters
+    from sain2021_g7.pipelines.modelling.HOLT_WINTERS import holt_winters
 
     return holt_winters(prod_sales_train, prod_sales_test, prod_sales, target)
+
+
+def Prophet(
+    prod_sales_train: pd.DataFrame,
+    prod_sales_test: pd.DataFrame,
+    prod_sales,
+    target: str,
+) -> pd.DataFrame:
+    """Prophet
+
+    Args:
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
+
+    Returns:
+        pd.DataFrame: results
+    """
+    from sain2021_g7.pipelines.modelling.Prophet import Prophet
+
+    return Prophet(prod_sales_train, prod_sales_test, prod_sales, target)
+
+
+def SVR(
+    prod_sales_train: pd.DataFrame,
+    prod_sales_test: pd.DataFrame,
+    prod_sales,
+    target: str,
+) -> pd.DataFrame:
+    """SVR
+
+    Args:
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
+
+    Returns:
+        pd.DataFrame: results
+    """
+    from sain2021_g7.pipelines.modelling.Prophet import svr
+
+    return Prophet(prod_sales_train, prod_sales_test, prod_sales, target)
+
+def LSTM(
+    prod_sales_train: pd.DataFrame,
+    prod_sales_test: pd.DataFrame,
+    prod_sales,
+    target: str,
+) -> pd.DataFrame:
+    """LSTM
+
+    Args:
+        prod_sales_train (pd.DataFrame): Train
+        prod_sales_test (pd.DataFrame): Test
+        prod_sales ([type]): Data
+        target (str): target
+
+    Returns:
+        pd.DataFrame: results
+    """
+    from sain2021_g7.pipelines.modelling.LSTM import lstm
+
+    return lstm(prod_sales_train, prod_sales_test, prod_sales, target)
 
 
 def concat(results_pporto: pd.DataFrame, 
